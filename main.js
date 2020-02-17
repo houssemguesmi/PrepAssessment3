@@ -18,16 +18,50 @@
     }   
   }
 
-  var employeeA = employee("jack", 100);
-  var employeeB = employee("Mark", 200);
-  var employeeC = employee("Sara", 150);
+  //var employeeA = employee("jack", 100);
+  //var employeeB = employee("Mark", 200);
+  //var employeeC = employee("Sara", 150);
 
 
   //create a function when invoked returns the name of that employee.
 
   // employeeA.sayMyName(); // "jack"
   // employeeB.sayMyName(); // "Mark"
+var employeeA = MakeEmployee('Jack',100)
+var employeeB = MakeEmployee("Mark", 200);
+var employeeC = MakeEmployee("Sara", 150);
 
+function MakeEmployee(employee,salary){
+  var current = salary;
+  var name = employee;
+  var nbF=0;
+  var friends='';
+      return {
+        sayMyName: function() {
+          return name;
+        },
+        sayHello: function() {
+          return 'Hello '+name+'.';
+        },
+        increaseSalary: function(amount) {
+          current=current+amount;
+          return 'Your salary is now '+current+'$.'
+        },
+        addFriend: function(obj) {
+          nbF++;
+          if(nbF===1){
+            friends=obj.sayMyName();
+            return 'You just became friend with '+friends
+          }else{
+            friends=friends+' and '+obj.sayMyName();
+            return 'You jsut became friend with '+friends
+          }
+        },
+        listFriends: function() {
+          return 'You have '+nbF+' Friends.';
+        }
+      }
+}
 
   //now modify that closure and add a function that says hello to the employee name;
 
@@ -53,11 +87,31 @@
 //=============================================================================
   //lets create a pet class using OOP concept,
   // a - we need to create the pets (lets create only one for now), the invocation should take the name of the pet. 
-
+  function Pet(pet) {
+    return {
+      Petname: pet
+    }
+  }
   // var pet1 = Pet("doggy");
 
   // b - we need function to add the other info for the pet, called addInfo function. Make sure your functions unneeded memory space
-
+  function MakePet(pet) {
+    Pet(pet);
+    var name=pet;
+    return {
+      addInfo: function(age, owner, gender, species) {
+        this.age= age,
+        this.owner= owner,
+        this.gender= gender,
+        this.species= species
+      },
+      increaseAge: function(n) {
+        this.age=this.age+n;
+        return "Your Pet's age is now "+this.age;
+      }
+    }
+  }
+  var pet1=MakePet('doggy')
   // pet1.addInfo(age, owner, gender, species);
 
   // c- create another function to increase the pet age by n value.
