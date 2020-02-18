@@ -1,0 +1,10 @@
+body {
+    background-color:red
+}
+header {
+    font-family: Arial
+}
+[type='text'] {
+    width: 300px;
+    height: 45px
+}

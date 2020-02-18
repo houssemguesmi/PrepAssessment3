@@ -10,14 +10,6 @@
 /*                              Q1                                            */
 //==============================================================================
 //lets make an employee profile using closures
-
-  function employee (name,salary){
-    return {
-      name: name,
-      salary: salary
-    }   
-  }
-
   //var employeeA = employee("jack", 100);
   //var employeeB = employee("Mark", 200);
   //var employeeC = employee("Sara", 150);
@@ -48,11 +40,15 @@ function MakeEmployee(employee,salary){
           return 'Your salary is now '+current+'$.'
         },
         addFriend: function(obj) {
-          nbF++;
-          if(nbF===1){
-            friends=obj.sayMyName();
-            return 'You just became friend with '+friends
-          }else{
+          if(nbF===0){
+            nbF++;
+            if(!friends.includes(obj.sayMyName())){
+              friends=obj.sayMyName();
+              return 'You just became friend with '+friends
+            }
+            
+          }else if(!friends.includes(obj.sayMyName())){
+            nbF++;
             friends=friends+' and '+obj.sayMyName();
             return 'You jsut became friend with '+friends
           }
@@ -87,30 +83,35 @@ function MakeEmployee(employee,salary){
 //=============================================================================
   //lets create a pet class using OOP concept,
   // a - we need to create the pets (lets create only one for now), the invocation should take the name of the pet. 
-  function Pet(pet) {
-    return {
-      Petname: pet
-    }
-  }
   // var pet1 = Pet("doggy");
 
   // b - we need function to add the other info for the pet, called addInfo function. Make sure your functions unneeded memory space
-  function MakePet(pet) {
-    Pet(pet);
-    var name=pet;
+  function MakePet(name) {
     return {
-      addInfo: function(age, owner, gender, species) {
-        this.age= age,
-        this.owner= owner,
-        this.gender= gender,
-        this.species= species
-      },
-      increaseAge: function(n) {
-        this.age=this.age+n;
-        return "Your Pet's age is now "+this.age;
-      }
+      name: name,
+      availibility: false,
+      addInfo: addInfo,
+      increaseAge: increaseAge,
+      checkPet: checkPet,
+      changeState: changeState
     }
   }
+function addInfo(age, owner, gender, species) {
+    this.age= age,
+    this.owner= owner,
+    this.gender= gender,
+    this.species= species
+}
+function  increaseAge(n) {
+    this.age+=n;
+    return "Your Pet's age is now "+this.age;
+}
+function checkPet() {
+  return this.availibility;
+}
+function changeState() {
+  this.availibility=!this.availibility
+}
   var pet1=MakePet('doggy')
   // pet1.addInfo(age, owner, gender, species);
 
@@ -126,7 +127,7 @@ function MakeEmployee(employee,salary){
 
 
   // Now, to make sure that you are actually reading, make a comment below this and type: Yes I am
-
+//  Yes  i am
 //=============================================================================
 /*                                  Q3                                       */
 //=============================================================================
@@ -156,7 +157,13 @@ function reduce(array, f, acc) {
 // Use the updated version of reduce to write a function max that returns the maximum number in an array of numbers. 
 
 // Write your code here .....
-
+function max(array) {
+    return reduce(array, function(max,number) {
+          if (number>max) {
+                return number
+          }else return max
+    },array[0]);  
+}
 
 
 
@@ -186,7 +193,12 @@ function reduce(array, f, acc) {
 
 // 3. Write javascript function when user type text inside the input text and click the "Add" 
 //     button it will add the text to the ul element.
-
+$( document ).ready(function() {
+  $("input[type|='button']").click(function() {
+    var store=$("input[type|='text']").val()
+    $('ul').append('-').append(store).append('<br>')
+  })
+});
 
 
                               //  Good Luck :))
